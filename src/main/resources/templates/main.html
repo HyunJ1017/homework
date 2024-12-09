@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P-Main</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <script th:src="${fontAwesomeKey}" crossorigin="anonymous"></script>
+
+  <th:block th:replace= "~{/common/header}"></th:block>
+  <th:block th:replace= "~{/common/main}"></th:block>
+  <th:block th:replace= "~{/common/footer}"></th:block>
+  <th:block th:replace= "~{/common/slider}"></th:block>
+
+
+  <script src="main.js"></script>
+</body>
+</html>
