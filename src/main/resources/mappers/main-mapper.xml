@@ -2,5 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.portpolio.main.mapper.MainMapper">
 
+	<insert id="insertCount">
+		MERGE INTO VISIT V
+		USING (SELECT TO_CHAR(SYSDATE, 'YYMMDD') AS CURRENT_DATE FROM DUAL) D
+		ON (V.VISIT_NO = D.CURRENT_DATE)
+		WHEN MATCHED THEN
+		    UPDATE SET V.VISIT_COUNT = V.VISIT_COUNT + 1
+		WHEN NOT MATCHED THEN
+		    INSERT (VISIT_NO, VISIT_COUNT)
+		    VALUES (D.CURRENT_DATE, 1)
+	</insert>
+	
+	<select id="selectAllVisitCount" resultType="string">
+		SELECT
+			TO_CHAR(SUM(VISIT_COUNT), 'FM999,999,999') AS WEEKLY_VISIT_COUNT
+		FROM VISIT
+		WHERE TO_DATE(VISIT_NO, 'YYMMDD') > SYSDATE-7
+	</select>
+
+	<select id="selectWeeklyVisitCount" resultType="string">
+		SELECT TO_CHAR(SUM(VISIT_COUNT), 'FM999,999,999') AS ALL_VISIT_COUNT
+		FROM VISIT
+	</select>
 	
 </mapper>

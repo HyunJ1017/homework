@@ -6,7 +6,7 @@
   <title>P-Main</title>
   <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body id="top">
   <script th:src="${fontAwesomeKey}" crossorigin="anonymous"></script>
 
   <th:block th:replace= "~{/common/header}"></th:block>
@@ -14,7 +14,7 @@
   <th:block th:replace= "~{/common/footer}"></th:block>
   <th:block th:replace= "~{/common/slider}"></th:block>
 
-
+  <div id="bottom"></div>
   <script src="main.js"></script>
 </body>
 </html>
