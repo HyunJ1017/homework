@@ -210,7 +210,6 @@ const enterEvent = () => {
 
 const leaveEvent = () => {
   if(!semiErdImgState) return;
-  console.log("leaveEvent");
   semiErdImg.style.transition = "none";
   semiErdImg.style.cursor = 'default';
   semiErdImg.style.position = 'static';
@@ -238,7 +237,6 @@ finalErdImg.addEventListener('mouseleave', () => {
 
 const enterEvent2 = () => {
   if(finalErdImgTime) return;
-  console.log("enterEvent");
   finalErdImgTime = true;
   
   finalErdImg.style.transition = "all 0.3s ease";
@@ -260,7 +258,6 @@ const enterEvent2 = () => {
 
 const leaveEvent2 = () => {
   if(!finalErdImgState) return;
-  console.log("leaveEvent");
   finalErdImg.style.transition = "none";
   finalErdImg.style.cursor = 'default';
   finalErdImg.style.position = 'static';
@@ -306,23 +303,23 @@ const waveAnimation = () => {
 
 
 /* ******************************************************* */
-// 모든 <a> 태그에 대해 부드러운 스크롤 적용
+// 모든 <a> 태그 이벤트
 document.querySelectorAll('.sliderA').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     
     let targetElement = document.querySelector(this.getAttribute('href'));
     const headerHeight = windowHeight * 0.2;
-    let topData = targetElement.offsetTop;
-
+    let topData = 0;
+    
     while (targetElement) {
       topData += targetElement.offsetTop;
       targetElement = targetElement.offsetParent;
     }
-
+    
     topData = topData - headerHeight;
 
-    // 목표 위치에서 헤더 높이만큼 위로 스크롤 (헤더 높이를 빼고 10px 더 위로)
+    // 목표 위치로 스크롤
     window.scrollTo({
       top: topData,
       behavior: 'smooth'
