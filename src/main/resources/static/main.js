@@ -1,4 +1,5 @@
 
+/* ******************************************************* */
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -6,44 +7,160 @@ document.addEventListener("DOMContentLoaded", () => {
   waveAnimation();
 
   // 클릭이벤트
-    // 이메일 복사
-    const email = document.getElementById("email");
-    email.addEventListener("click", () => {
-      if(emailFl) return;
-      emailFl = true;
-      copyToClipboard("hyunj1017@naver.com");
-      const emailBackup = email.innerHTML;
-      email.innerHTML = '<i class="fa-brands fa-square-js" style="color: #FFD43B;"></i>이메일이 복사되었습니다: hyunj1017@naver.com';
-      setTimeout(() => {
-        email.innerHTML = emailBackup;
-        emailFl = false;
-      }, 3000);
-    });
-  
-    // 전화번호 복사
-    const phone = document.getElementById("phone");
-    phone.addEventListener("click", () => {
-      if(phoneFl) return;
-      phoneFl = true;
-      copyToClipboard("010-2113-3766");
-      const phoneBackup = phone.innerHTML;
-      phone.innerHTML = '<i class="fa-brands fa-square-js" style="color: #FFD43B;"></i>전화번호가 복사되었습니다: 010-2113-3766';
-      setTimeout(() => {
-        phone.innerHTML = phoneBackup;
-        phoneFl = false;
-      }, 3000);
-    });
-  
-    // 클립보드 복사 함수
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).catch(err => {
-        console.error('복사 실패:', err);
-      });
-    }
-});
+  // 이메일 복사
+  const email = document.getElementById("email");
+  email.addEventListener("click", () => {
+    if(emailFl) return;
+    emailFl = true;
+    copyToClipboard("hyunj1017@naver.com");
+    const emailBackup = email.innerHTML;
+    email.innerHTML = '<i class="fa-brands fa-square-js" style="color: #FFD43B;"></i>이메일이 복사되었습니다: hyunj1017@naver.com';
+    setTimeout(() => {
+      email.innerHTML = emailBackup;
+      emailFl = false;
+    }, 3000);
+  });
 
+  // 전화번호 복사
+  const phone = document.getElementById("phone");
+  phone.addEventListener("click", () => {
+    if(phoneFl) return;
+    phoneFl = true;
+    copyToClipboard("010-2113-3766");
+    const phoneBackup = phone.innerHTML;
+    phone.innerHTML = '<i class="fa-brands fa-square-js" style="color: #FFD43B;"></i>전화번호가 복사되었습니다: 010-2113-3766';
+    setTimeout(() => {
+      phone.innerHTML = phoneBackup;
+      phoneFl = false;
+    }, 3000);
+  }); // click end
+
+  // 클립보드 복사 함수
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).catch(err => {
+      console.error('복사 실패:', err);
+    });
+  } // copyToClipboard end
+
+  // 깃발모으기
+  for(let i=0;i<contents.length;i++){
+    const flag = false;
+    sectionFlags.push(flag);
+  } // for end
+
+  // 첫화면 로딩
+  const currentHeight = window.scrollY;
+  for(let i = 0; i<contents.length; i++ ){
+
+    const content = contents[i];
+    const contentHead = content.offsetTop;
+    const contentTail = content.offsetTop + content.offsetHeight;
+
+    if(( contentHead < currentHeight + windowHeight < contentTail  ) || ( contentTail > currentHeight > contentHead ) ) {
+      sectionFlags[i] = true;
+      content.style.transition = "none";
+      content.style.transform = "translateX(-100vW)";
+      content.style.opacity = 1;
+      content.style.transition = "all 1.5s ease";
+      content.style.transform = "translateX(0)";
+    }
+
+    
+  }// for end
+});
 let emailFl = false;
 let phoneFl = false;
+
+
+
+
+/* ******************************************************* */
+/* slide */
+
+const contents = document.querySelectorAll("main .contents-section");
+let windowHeight = window.innerHeight;
+let preHeight = 0;
+let scrollStatus = "down";
+let sectionFlags = [];
+
+
+function recalculatePositions() {
+  windowHeight = window.innerHeight; // 현재 윈도우 높이 갱신
+  console.log("Window resized, recalculating positions...");
+}
+window.addEventListener("resize", recalculatePositions);
+
+// 위 25% 또는 아래 25% 이상이 모이면 100% 보이게할거임
+// 현재화면 높이의 25% : window.innerHeight / 4
+
+// 무시
+// 윗좌표 : headHeignts[i]
+// 위 25% 좌표 : headHeignts[i] + window.innerHeight / 4
+
+// 아래에서 25% 좌표 : tailHeights[i] - window.innerHeight / 4
+// 아랫좌표 : tailHeights[i]
+// 무시
+window.addEventListener("scroll", () => {
+  const currentHeight = window.scrollY;
+  if(currentHeight > preHeight) {
+    scrollStatus = "down";
+  } else {
+    scrollStatus = "up";
+  }
+  preHeight = currentHeight;
+
+  for(let i = 0; i<contents.length; i++ ){
+
+    const content = contents[i];
+    const contentHead = content.offsetTop;
+    const contentTail = content.offsetTop + content.offsetHeight;
+
+    if(scrollStatus === "down") {
+      if(currentHeight + windowHeight < contentHead) continue;
+      if(currentHeight + windowHeight < contentHead + (windowHeight*0.6)){
+        if(sectionFlags[i] === true) continue;
+        sectionFlags[i] = true;
+        content.style.transition = "none";
+        content.style.transform = "translateX(100vW)";
+        content.style.opacity = 1;
+        content.style.transition = "all 1s ease";
+        content.style.transform = "translateX(0)";
+      }
+      if(currentHeight > contentTail - (windowHeight*0.4)) {
+        if(sectionFlags[i] === false) continue;
+        content.style.transition = "all 1s ease";
+        content.style.transform = "translateX(100vW)";
+        setTimeout((() => {
+          sectionFlags[i] = false;
+          content.style.opacity = 0;
+        }), 1500);
+      }
+    }
+    
+    if(scrollStatus === "up") {
+      if(currentHeight > contentTail) continue;
+      if(currentHeight > contentTail - (windowHeight*0.7)) {
+        if(sectionFlags[i] === true) continue;
+        sectionFlags[i] = true;
+        content.style.transition = "none";
+        content.style.transform = "translateX(-100vW)";
+        content.style.opacity = 1;
+        content.style.transition = "all 1s ease";
+        content.style.transform = "translateX(0)";
+      }
+      if(currentHeight + windowHeight < contentHead + (windowHeight*0.3)) {
+        if(sectionFlags[i] === false) continue;
+        content.style.transition = "all 1s ease";
+        content.style.transform = "translateX(-100vW)";
+        setTimeout((() => {
+          sectionFlags[i] = false;
+          content.style.opacity = 0;
+        }), 1500);
+      }
+    }
+  }
+
+}) // scroll end
 
 
 /* ******************************************************* */
@@ -190,16 +307,24 @@ const waveAnimation = () => {
 
 /* ******************************************************* */
 // 모든 <a> 태그에 대해 부드러운 스크롤 적용
-document.querySelectorAll('.slider a').forEach(anchor => {
+document.querySelectorAll('.sliderA').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     
-    const targetElement = document.querySelector(this.getAttribute('href'));
-    const headerHeight = window.innerHeight * 0.1; // 10vh를 픽셀로 변환
+    let targetElement = document.querySelector(this.getAttribute('href'));
+    const headerHeight = windowHeight * 0.2;
+    let topData = targetElement.offsetTop;
+
+    while (targetElement) {
+      topData += targetElement.offsetTop;
+      targetElement = targetElement.offsetParent;
+    }
+
+    topData = topData - headerHeight;
 
     // 목표 위치에서 헤더 높이만큼 위로 스크롤 (헤더 높이를 빼고 10px 더 위로)
     window.scrollTo({
-      top: targetElement.offsetTop - headerHeight - 10, // 10px 추가로 위로 조정
+      top: topData,
       behavior: 'smooth'
     });
   });
@@ -220,5 +345,20 @@ logSkills.forEach((skill, index) => {
   skill.addEventListener('mouseleave', () => {
     logChanges[index].style.color = 'white';
     logLogs[index].style.display = 'none';
+  });
+});
+
+/* ******************************************************* */
+/* skillStack2 */
+
+const shyImgs = document.querySelectorAll(".shy-img");
+const hiddenImgs = document.querySelectorAll(".hidden-img");
+
+shyImgs.forEach((shyImg, index) => {
+  shyImg.addEventListener('mouseenter', () => {
+    hiddenImgs[index].style.display = 'flex';
+  });
+  hiddenImgs[index].addEventListener('mouseleave', () => {
+    hiddenImgs[index].style.display = 'none';
   });
 });

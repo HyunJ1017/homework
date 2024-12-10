@@ -13,6 +13,7 @@ body{
   min-height: 100vh;
   width: 100%;
   background-color: black;
+  overflow-x: hidden
 }
 a{
   text-decoration: none;
@@ -27,9 +28,11 @@ header{
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  margin: auto;
   z-index: 10;
   background-color: black;
-  width: 100%;
+  width: 100vw;
   height: 10vh;
   border-bottom: 1px solid white;
   display: flex;
@@ -58,9 +61,11 @@ footer{
   position: sticky;
   bottom: -10vh;
   left: 0;
+  right: 0;
+  margin: auto;
   z-index: 10;
   background-color: black;
-  width: 100%;
+  width: 100vw;
   height: 15vh;
   border-top: 1px solid white;
 }
@@ -97,6 +102,9 @@ main>.contents-section{
   padding: 2%;
   border-radius: 25px;
   margin: 50px auto;
+
+  opacity: 0;
+  visibility: visible;
 }
 .rowbox{
   display: flex;
@@ -156,7 +164,7 @@ main>.contents-section{
   flex-wrap: wrap;
   margin: 20px 0;
 }
-.skill-box>div{
+.skill-box>.link-none{
   margin: 5px;
   padding: 5px;
   min-width: 100px;
@@ -168,8 +176,24 @@ main>.contents-section{
   align-items: center;
   user-select: none;
 }
-#mainSkill-box>div:hover{
+.skill-box>.link-on{
+  margin: 5px;
+  padding: 5px;
+  min-width: 100px;
+  min-height: 50px;
+  border: 1px solid #e65100;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+#mainSkill-box>.link-none:hover{
   background-color: #ffffff15;
+}
+.skill-box>.link-on:hover{
+  background-color: #ffffff;
+  color: black;
 }
 #link-icon{
   font-size: 30px;
@@ -258,4 +282,96 @@ main>.contents-section{
 }
 #log-contents li:nth-child(2n){
   list-style: none;
+}
+
+/* 깃허브에서 가져온 더 별거 없는거 */
+#skillStack-section>.contents-col>div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+#skillStack-section>.contents-col>div:last-child>*{
+  margin: 10px 0;
+}
+#skillStack-section>.contents-col>img{
+  background-color: #ffffff;
+  border-radius: 3px;
+  padding: 10px;
+  width: 76%;
+}
+
+/* 쭉 쓰는 글 */
+.skillStack2-section>.contents-col{
+  position: relative;
+}
+.skillStack2-section .alone-img,
+.skillStack2-section .shy-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 1250px;
+  height: 100%;
+  margin-bottom: 70px;
+}
+.skillStack2-section .hidden-img{
+  display: none;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  justify-content: center;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1250px;
+  height: 100%;
+}
+.shy-sticky>img,
+.hidden-sticky>img,
+.alone-img>img,
+.shy-img>img,
+.hidden-img>img{
+  width: 100%;
+  height: auto;
+}
+.img-container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 15%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.shy-sticky {
+  position: relative;
+  width: 90%;
+  max-width: 1250px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.shy-sticky img {
+  width: 100%;
+  height: auto;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+.shy-sticky img:nth-child(3) {
+  opacity: 0;
+  position: absolute;
+  top: 25px;
+  left: 0;
+  z-index: 2;
+}
+.shy-sticky:hover img:nth-child(2) {
+  opacity: 0;
+}
+.shy-sticky:hover img:nth-child(3) {
+  opacity: 1;
 }
