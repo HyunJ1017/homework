@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
       content.style.transition = "none";
       content.style.transform = "translateX(-100vW)";
       content.style.opacity = 1;
-      content.style.transition = "all 1.5s ease";
+      content.style.transition = "all 0.5s ease";
       content.style.transform = "translateX(0)";
     }
-
     
   }// for end
+
 });
 let emailFl = false;
 let phoneFl = false;
@@ -102,6 +102,9 @@ window.addEventListener("resize", recalculatePositions);
 // 무시
 window.addEventListener("scroll", () => {
   const currentHeight = window.scrollY;
+
+  backgroundMoving(currentHeight);
+
   if(currentHeight > preHeight) {
     scrollStatus = "down";
   } else {
@@ -123,44 +126,60 @@ window.addEventListener("scroll", () => {
         content.style.transition = "none";
         content.style.transform = "translateX(100vW)";
         content.style.opacity = 1;
-        content.style.transition = "all 1s ease";
+        content.style.transition = "all 0.5s ease";
         content.style.transform = "translateX(0)";
       }
       if(currentHeight > contentTail - (windowHeight*0.4)) {
         if(sectionFlags[i] === false) continue;
-        content.style.transition = "all 1s ease";
+        content.style.transition = "all 0.5s ease";
         content.style.transform = "translateX(100vW)";
         setTimeout((() => {
           sectionFlags[i] = false;
           content.style.opacity = 0;
-        }), 1500);
+        }), 500);
       }
     }
     
     if(scrollStatus === "up") {
       if(currentHeight > contentTail) continue;
-      if(currentHeight > contentTail - (windowHeight*0.7)) {
+      if(currentHeight > contentTail - (windowHeight*0.75)) {
         if(sectionFlags[i] === true) continue;
         sectionFlags[i] = true;
         content.style.transition = "none";
         content.style.transform = "translateX(-100vW)";
         content.style.opacity = 1;
-        content.style.transition = "all 1s ease";
+        content.style.transition = "all 0.5s ease";
         content.style.transform = "translateX(0)";
       }
-      if(currentHeight + windowHeight < contentHead + (windowHeight*0.3)) {
+      if(currentHeight + windowHeight < contentHead + (windowHeight*0.25)) {
         if(sectionFlags[i] === false) continue;
-        content.style.transition = "all 1s ease";
+        content.style.transition = "all 0.5s ease";
         content.style.transform = "translateX(-100vW)";
         setTimeout((() => {
           sectionFlags[i] = false;
           content.style.opacity = 0;
-        }), 1500);
+        }), 500);
       }
     }
   }
 
 }) // scroll end
+
+// 문서 전체높이
+const backgroundBox = document.querySelector("#backgroundBox");
+const backgroundMoving = (currentHeight) => {
+  const backgroundImg = document.querySelector("#backgroundBox img");
+  const backgroundImgHeght = backgroundImg.offsetHeight;
+  
+  // 이미지 높이 - 화면높이(가변범위)
+  const height = backgroundImgHeght - windowHeight;
+
+  // 문서 전체 높이 - 화면 높이(가변높이)
+  const docHeight = document.documentElement.scrollHeight;
+
+  backgroundBox.style.top = `${(currentHeight/docHeight)*(height)*(-1)}px`;
+
+};
 
 
 /* ******************************************************* */
