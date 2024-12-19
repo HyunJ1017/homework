@@ -3,7 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: white;
+  font-family: "MaruBuri";
 }
 body{
   display: flex;
@@ -12,14 +12,13 @@ body{
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  background-color: black;
   overflow-x: hidden
 }
 a{
   text-decoration: none;
 }
 a:hover{
-  color: #008cff;
+  color: #36a0f7 !important;
   text-decoration: underline;
 }
 #backgroundBox{
@@ -39,6 +38,18 @@ a:hover{
   filter: brightness(15%);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+iframe {
+  max-width: 100%;
+  height: auto;
+  border: none;
+}
+
+
 /* headers */
 header{
   position: fixed;
@@ -47,10 +58,8 @@ header{
   right: 0;
   margin: auto;
   z-index: 10;
-  background-color: black;
   width: 100vw;
   height: 10vh;
-  border-bottom: 1px solid white;
   display: flex;
   flex-direction: column;
 }
@@ -59,7 +68,7 @@ header>section:first-child{
   text-align: right;
 }
 header>section:first-child>span:last-child{
-  color: #008cff;
+  color: #008cff  !important;
 }
 header>section:last-child{  height: 70%;}
 #header-icons{
@@ -71,20 +80,164 @@ header>section:last-child{  height: 70%;}
   top: 0;
   left: 110vw;
 }
+.fa-html5 { color: #e65100 !important; }
+.fa-js { color: #FFD43B !important; }
+.fa-css3-alt { color: #74C0FC !important; }
+.fa-java { color: #ff0000 !important; }
+.fa-amazon-pay { color: #ff0000 !important; }
+.fa-chrome { color: #5c98ff !important; }
+.fa-figma { color: #63E6BE !important; }
+.fa-react { color: #74C0FC !important; }
+.fa-gear-code { color: #74C0FC !important; }
+.fa-loader { --fa-primary-color: #5291ff !important; --fa-secondary-color: #5291ff !important; }
+.fa-comment { --fa-primary-color: #fbff00 !important; --fa-secondary-color: #fbff00 !important; }
+
 
 /* footers */
 footer{
   position: sticky;
-  bottom: -10vh;
+  bottom: -15vh;
   left: 0;
   right: 0;
   margin: auto;
   z-index: 10;
-  background-color: black;
   width: 100vw;
-  height: 15vh;
-  border-top: 1px solid white;
+  height: 20vh;
+  transition: all 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
+.footer-selector{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+  padding: 0 30px 0;
+  font-size: 1.5em;
+}
+.footer-selector>*{
+  margin: 0 10px;
+}
+.footer-contents{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 15vh;
+  padding: 0 30px 0;
+}
+#comment, #gear:hover{
+  cursor: pointer;
+}
+#loader{
+  display: none;
+}
+#themeList-background{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+}
+#themeList-background>div{
+  width: 30%;
+  height: 80%;
+  margin: 3px 10px;
+  border-radius: 5px;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#themeList-background>div:hover{
+  cursor: pointer;
+}
+#themeList-background>div:first-child{
+  background-color: black;
+  color: white  !important;
+}
+#themeList-background>div:last-child{
+  background-color: white;
+  color: black  !important;
+}
+#comments-board{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  margin-top: 5px;
+}
+#commentLists{
+  width: 100%;
+  height: 60%;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+#commentLists>.commentDiv{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 24px;
+}
+#commentLists>.commentDiv>div:first-child{
+  width: 100px;
+  height: 24px;
+  margin: 2px 10px;
+  text-align: center;
+}
+#commentLists>.commentDiv>div:nth-child(2){
+  width: 80px;
+  height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  white-space: nowrap;
+}
+#commentLists>.commentDiv>div:nth-child(3){
+  width: 80px;
+  height: 24px;
+  margin: 2px 10px;
+  text-align: left;
+  align-content: end;
+  font-size: 0.8em;
+  flex-grow: 1;
+}
+.comments-enter{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40%;
+}
+#comment-input{
+  width: 50%;
+  margin: 0 10px;
+}
+#comment-enter{
+  width: 80px;
+  height: 24px;
+  margin: 3px 10px;
+  background-color: #36a0f7;
+  border-radius: 5px;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#comment-enter:hover{
+  cursor: pointer;
+}
+
 
 /* slider */
 .slider{
@@ -96,7 +249,6 @@ footer{
   justify-content: center;
   align-items: center;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 25px;
 }
@@ -114,11 +266,9 @@ main>.contents-section{
   min-height: 45vh;
   min-width: 60vw;
   max-width: 90vw;
-  border: 1px solid white;
   padding: 2%;
   border-radius: 25px;
   margin: 50px auto;
-
   opacity: 0;
   visibility: visible;
 }
@@ -158,7 +308,7 @@ main>.contents-section{
 /* 프로필 */
 #profile-img{
   width: auto;
-  height: 40vh;
+  max-height: 40vh;
   align-self: center;
 }
 #profile-box{
@@ -170,7 +320,7 @@ main>.contents-section{
 #email:hover,
 #phone:hover{
   cursor:pointer;
-  color: #008cff;
+  color: #008cff !important;
   text-decoration: underline;
 }
 .skill-box{
@@ -208,8 +358,8 @@ main>.contents-section{
   background-color: #ffffff15;
 }
 .skill-box>.link-on:hover{
-  background-color: #ffffff;
-  color: black;
+  background-color: #ffffff75;
+  color: black !important;
 }
 #link-icon{
   font-size: 30px;
@@ -232,18 +382,19 @@ main>.contents-section{
   list-style: none; /* 기본 마커 제거 */
 }
 .project-contents li{
+  overflow-x: auto;
   margin-top: 20px;
   margin-left: 30px;
   position: relative;
 }
-.project-contents li::before {
-  content: "•"; /* 마커 대신 점 추가 */
+.project-contents li::before {/* 마커설정 */
+  content: "•";
   position: absolute;
-  top: 0; /* 상단에 맞춤 */
-  left: -13px; /* 왼쪽에 맞춤 */
-  color: rgb(255, 255, 255); /* 마커 색상 */
-  font-size: 16px; /* 마커 크기 */
-  line-height: 1.4; /* 마커 높이 조정 */
+  top: 0;
+  left: -13px;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  line-height: 1.4;
 }
 #final-img,
 #semi-img{
@@ -258,7 +409,6 @@ main>.contents-section{
   height: auto;
 }
 .project-contents table{
-  border-color: aliceblue;
   border-collapse: collapse;
 }
 .project-contents table th{
@@ -322,6 +472,11 @@ main>.contents-section{
   border-radius: 3px;
   padding: 10px;
   width: 76%;
+}
+.responsive-iframe {
+  width: 100%;
+  aspect-ratio: 6 / 4;
+  border: none;
 }
 
 /* 쭉 쓰는 글 */
@@ -396,4 +551,34 @@ main>.contents-section{
 }
 .shy-sticky:hover img:nth-child(3) {
   opacity: 1;
+}
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'MaruBuriSemiBold';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot);
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'MaruBuriBold';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot);
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'MaruBuriLight';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot);
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'MaruBuriExtraLight';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot);
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.ttf) format("truetype");
 }

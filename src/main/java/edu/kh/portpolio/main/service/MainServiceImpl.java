@@ -1,10 +1,12 @@
 package edu.kh.portpolio.main.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import edu.kh.portpolio.main.dto.Comment;
 import edu.kh.portpolio.main.mapper.MainMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +33,22 @@ public class MainServiceImpl implements MainService {
 			return map;
 		}
 		
+		return null;
+	}
+
+	@Override
+	public List<Comment> getComments() {
+		return mapper.getComments();
+	}
+
+	@Override
+	public Comment writeComment(Comment comment) {
+		
+		int result = mapper.writeComment(comment);
+		
+		if(result > 0) {
+			return mapper.selectComment(comment);
+		}
 		return null;
 	}
 

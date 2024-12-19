@@ -378,3 +378,119 @@ shyImgs.forEach((shyImg, index) => {
     hiddenImgs[index].style.display = 'none';
   });
 });
+
+
+/* ******************************************************* */
+/* comments */
+const commentIcon = document.querySelector("#comment");
+commentIcon.addEventListener('click', () => {
+  footer.style.bottom = 0;
+  renderingComments();
+}); // click end
+
+const renderingComments = () => {
+  footerContents.style.height = '15vh';
+  footerContents.style.flexDirection = 'column';
+  footerContents.style.justifyContent = 'center';
+  footerContents.innerHTML
+  = '<h4>댓글 입니다</h4>'
+  + `<div id="comments-board" style="border: 1px solid ${pageTheme.borderColor == "black" ? 'black' : 'white'}; border-radius: 5px;">`
+  +   `<div id="commentLists" style="border-bottom: 1px solid ${pageTheme.borderColor == "black" ? 'black' : 'white'};">`
+  +   '</div>'
+  +   `<div class="comments-enter">`
+  +     '<span id="comment-count">0/50</span>'
+  +     '<input type="text" id="comment-input" placeholder="댓글을 입력해주세요">'
+  +     '<div id="comment-enter">입력</div>'
+  +   '</div>'
+  + '</div>';
+
+  const commentLists = document.querySelector('#commentLists');
+  const commentInput = document.querySelector('#comment-input');
+  const commentEnter = document.querySelector('#comment-enter');
+  const commentCount = document.querySelector('#comment-count');
+  commentLists.innerHTML = '';
+
+  fetch('/main/getComments')
+  .then(response => response.json())
+  .then(comments => {
+
+    if(comments.length === 0){
+      commentLists.innerHTML = '댓글이 존재하지 않습니다.';
+      return;
+    }
+
+    comments.forEach(comment => {
+      const commentDiv = document.createElement('div');
+      commentDiv.innerHTML = `<div>${comment.writer}</div><div>${comment.content}</div><div>${comment.regDate}</div>`;
+      commentDiv.classList.add("commentDiv");
+      commentDiv.dataset.commentNo = comment.commentNo;
+      commentLists.appendChild(commentDiv);
+    });
+
+    commentLists.scrollTop = commentLists.scrollHeight;
+  }); // fetch end
+
+  commentInput.addEventListener('keyup', (e) => {
+
+    const length = commentInput.value.length;
+
+    if (e.key === 'Enter' && length <= 50) {
+      commentEnter.click();
+    }
+
+    commentCount.innerText = `${length}/50`;
+    if(length > 50){
+      commentCount.style.color = 'red';
+      return;
+    }
+    commentCount.style.color = pageTheme.color;
+
+
+  }); // keyup end
+
+  commentEnter.addEventListener('click', () => {
+    const comment = commentInput.value;
+    if(comment.length === 0){
+      alert("내용을 입력해 주세요");
+      return;
+    }
+    if(comment.length > 50){
+      alert("50자 이내의 내용을 입력해 주세요");
+      return;
+    }
+
+    const sendObj = {
+      "content" : comment,
+      "writer" : visitor
+    }
+    fetch('/main/writeComment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(sendObj)
+    })
+    .then(response => response.json())
+    .then(result => {
+      if(result.code == 1){
+        const comment = result.comment;
+        const commentDiv = document.createElement('div');
+        commentDiv.innerHTML = `<div>${comment.writer}</div><div>${comment.content}</div><div>${comment.regDate}</div>`;
+        commentDiv.classList.add("commentDiv");
+        commentDiv.dataset.commentNo = comment.commentNo;
+        commentLists.appendChild(commentDiv);
+        commentLists.scrollTop = commentLists.scrollHeight;
+        commentInput.value = '';
+      } else if(result.code == 2){
+        alert("입력하신 내용은 추가하실 수 없습니다.");
+      } else {
+        alert("통신오류가 있습니다.");
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }); // click end
+
+} // renderingComments end
+

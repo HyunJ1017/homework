@@ -6,7 +6,7 @@
   <title>P-Main</title>
   <link rel="stylesheet" href="main.css">
 </head>
-<body id="top">
+<body id="top" class="userTheme-backgroundColor">
   <script th:src="${fontAwesomeKey}" crossorigin="anonymous"></script>
 
   <th:block th:replace= "~{common/header}"></th:block>
@@ -18,6 +18,11 @@
   <div id="backgroundBox">
     <img src="/images/background.jpg">
   </div>
-  <script src="main.js"></script>
+  <script th:inline="javascript">
+    let pageTheme = /*[[${theme}]]*/'테마객체';
+    const visitor = /*[[${visitor}]]*/'연월일번호';
+  </script>
+  <script src="/js/main.js"></script>
+  <script src="/js/theme.js"></script>
 </body>
 </html>

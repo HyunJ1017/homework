@@ -25,4 +25,77 @@
 		WHERE TO_DATE(VISIT_NO, 'YYMMDD') > SYSDATE-7
 	</select>
 	
+	<select id="getComments" resultType="Comment">
+		SELECT
+			COMMENT_NO,
+			WRITER,
+			CONTENT,
+			<![CDATA[	
+			CASE
+				WHEN CURRENT_DATE - REG_DATE < 1/24/60
+				THEN FLOOR( (CURRENT_DATE - REG_DATE) *60 *60 *24 ) || '초 전'
+				
+				WHEN CURRENT_DATE - REG_DATE < 1/24
+				THEN FLOOR( (CURRENT_DATE - REG_DATE) *60 *24 ) || '분 전'
+				
+				WHEN CURRENT_DATE - REG_DATE < 1
+				THEN FLOOR( (CURRENT_DATE - REG_DATE) *24 ) || '시간 전'
+				
+				ELSE TO_CHAR(REG_DATE, 'YYYY-MM-DD')
+				
+			END AS "REG_DATE"
+			]]>
+		FROM "COMMENT"
+		WHERE
+			DEL_FL = 'N'
+	</select>
+	
+	<insert id="writeComment"
+			parameterType="Comment"
+			useGeneratedKeys="true">
+		
+		<selectKey order="BEFORE" resultType="_int"
+				   keyProperty="commentNo">
+			SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL		   
+		</selectKey>
+		
+		INSERT INTO "COMMENT"
+		VALUES(
+			#{commentNo},
+			#{writer},
+			#{content},
+			DEFAULT,
+			DEFAULT
+			)
+	</insert>
+	
+	<select id="selectComment" resultType="Comment">
+	SELECT
+		COMMENT_NO,
+		WRITER,
+		CONTENT,
+		<![CDATA[	
+		CASE
+			WHEN CURRENT_DATE - REG_DATE < 1/24/60/2
+			THEN '방금전'
+			
+			WHEN CURRENT_DATE - REG_DATE < 1/24/60
+			THEN FLOOR( (CURRENT_DATE - REG_DATE) *60 *60 *24 ) || '초 전'
+			
+			WHEN CURRENT_DATE - REG_DATE < 1/24
+			THEN FLOOR( (CURRENT_DATE - REG_DATE) *60 *24 ) || '분 전'
+			
+			WHEN CURRENT_DATE - REG_DATE < 1
+			THEN FLOOR( (CURRENT_DATE - REG_DATE) *24 ) || '시간 전'
+			
+			ELSE TO_CHAR(REG_DATE, 'YYYY-MM-DD')
+			
+		END AS "REG_DATE"
+		]]>
+	FROM "COMMENT"
+	WHERE
+		DEL_FL = 'N'
+	AND COMMENT_NO = #{commentNo}
+	</select>
+	
 </mapper>
