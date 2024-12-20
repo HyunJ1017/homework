@@ -64,7 +64,7 @@
 			#{commentNo},
 			#{writer},
 			#{content},
-			DEFAULT,
+			CAST(SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul' AS DATE),
 			DEFAULT
 			)
 	</insert>
