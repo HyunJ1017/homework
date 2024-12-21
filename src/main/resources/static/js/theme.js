@@ -1,4 +1,3 @@
-console.log(pageTheme);
 
 const userThemeBackgroundColor = document.querySelectorAll(".userTheme-backgroundColor");
 const userThemeBackgroundColor70 = document.querySelectorAll(".userTheme-backgroundColor70");
@@ -23,7 +22,7 @@ if(pageTheme.backgroundColor === 'black'){
   userThemeBackgroundColor70.forEach(element => {
     element.style.backgroundColor = 'rgb(5, 5, 5)';
   })
-  backgroundImg.style.filter = 'brightness(15%)';
+  backgroundImg.style.filter = 'opacity(0.13)';
   contentsSections.forEach(element => {
     element.style.backgroundColor = 'rgba(255, 255, 255, 0)';
     element.style.border = `1px solid ${pageTheme.borderColor}`;
@@ -37,9 +36,9 @@ if(pageTheme.backgroundColor === 'black'){
   userThemeBackgroundColor70.forEach(element => {
     element.style.backgroundColor = 'rgb(250, 250, 250)';
   })
-  backgroundImg.style.filter = 'brightness(39%)';
+  backgroundImg.style.filter = 'opacity(0.2)';
   contentsSections.forEach(element => {
-    element.style.backgroundColor = 'rgb(255, 255, 255)';
+    element.style.backgroundColor = 'rgba(255, 255, 255, 0.88)';
     element.style.border = `1px solid ${pageTheme.borderColor}`;
   })
   userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
@@ -71,15 +70,21 @@ const footer = document.querySelector('footer');
 const footerContents = document.querySelector('.footer-contents');
 const loader = document.querySelector('#loader');
 let themeFl = false;
+let footerFl = false;
 
 gear.addEventListener('click', () => {
   footer.style.bottom = '-5vh';
+  footerFl = true;
+  setTimeout(() => {
+    footerFl = false;
+  }, 300);
   renderingTheme();
 }); // click end
 
 footer.addEventListener('mouseleave', () => {
-  //footer.style.bottom = '-15vh';
-  //contentsClear();
+  if(footerFl) return;
+  footer.style.bottom = '-15vh';
+  contentsClear();
 });  // mouseleave end
 
 const renderingTheme = () => {
@@ -107,7 +112,7 @@ const renderingTheme = () => {
     document.querySelectorAll(".userTheme-backgroundColor70").forEach(element => {
       element.style.backgroundColor = 'rgba(5, 5, 5)';
     })
-    backgroundImg.style.filter = 'brightness(15%)';
+    backgroundImg.style.filter = 'opacity(0.13)';
     document.querySelectorAll('*').forEach(element => {
       element.style.color = 'white';
     });
@@ -160,12 +165,12 @@ const renderingTheme = () => {
     document.querySelectorAll(".userTheme-backgroundColor70").forEach(element => {
       element.style.backgroundColor = 'rgb(250, 250, 250)';
     })
-    backgroundImg.style.filter = 'brightness(39%)';
+    backgroundImg.style.filter = 'opacity(0.2)';
     document.querySelectorAll('*').forEach(element => {
       element.style.color = 'black';
     });
     contentsSections.forEach(element => {
-      element.style.backgroundColor = 'rgb(255, 255, 255)';
+      element.style.backgroundColor = 'rgba(255, 255, 255, 0.88)';
       element.style.border = '1px solid black';
     })
     document.querySelectorAll(".userTheme-border").forEach(element => {

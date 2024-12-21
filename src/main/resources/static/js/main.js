@@ -385,6 +385,9 @@ shyImgs.forEach((shyImg, index) => {
 const commentIcon = document.querySelector("#comment");
 commentIcon.addEventListener('click', () => {
   footer.style.bottom = 0;
+  setTimeout(() => {
+    footerFl = false;
+  }, 300);
   renderingComments();
 }); // click end
 
@@ -395,8 +398,8 @@ const renderingComments = () => {
   footerContents.innerHTML
   = '<h4>댓글 입니다</h4>'
   + `<div id="comments-board" style="border: 1px solid ${pageTheme.borderColor == "black" ? 'black' : 'white'}; border-radius: 5px;">`
-  +   `<div id="commentLists" style="border-bottom: 1px solid ${pageTheme.borderColor == "black" ? 'black' : 'white'};">`
-  +   '</div>'
+  +   `<table id="commentLists" style="border-bottom: 1px solid ${pageTheme.borderColor == "black" ? 'black' : 'white'};">`
+  +   '</table>'
   +   `<div class="comments-enter">`
   +     '<span id="comment-count">0/50</span>'
   +     '<input type="text" id="comment-input" placeholder="댓글을 입력해주세요">'
@@ -420,11 +423,11 @@ const renderingComments = () => {
     }
 
     comments.forEach(comment => {
-      const commentDiv = document.createElement('div');
-      commentDiv.innerHTML = `<div>${comment.writer}</div><div>${comment.content}</div><div>${comment.regDate}</div>`;
-      commentDiv.classList.add("commentDiv");
-      commentDiv.dataset.commentNo = comment.commentNo;
-      commentLists.appendChild(commentDiv);
+      const commentRow = document.createElement('tr');
+      commentRow.innerHTML = `<td><div>${comment.content}</div><div>${comment.regDate}</div></td><td>${comment.writer}</td>`;
+      commentRow.classList.add("commentRow");
+      commentRow.dataset.commentNo = comment.commentNo;
+      commentLists.appendChild(commentRow);
     });
 
     commentLists.scrollTop = commentLists.scrollHeight;

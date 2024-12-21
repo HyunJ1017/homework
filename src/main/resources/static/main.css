@@ -115,7 +115,7 @@ footer{
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 5vh;
+  height: 4vh;
   padding: 0 30px 0;
   font-size: 1.5em;
 }
@@ -128,7 +128,7 @@ footer{
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 15vh;
+  height: 16vh;
   padding: 0 30px 0;
 }
 #comment, #gear:hover{
@@ -166,7 +166,7 @@ footer{
   background-color: white;
   color: black  !important;
 }
-#comments-board{
+#comments-board{ /* 댓글부분 */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -175,41 +175,62 @@ footer{
   height: 100%;
   margin-top: 5px;
 }
-#commentLists{
+#commentLists {
   width: 100%;
   height: 60%;
-  flex-grow: 1;
+  border-collapse: collapse;
+  table-layout: fixed;
   overflow-y: auto;
 }
-#commentLists>.commentDiv{
+
+#commentLists > .commentRow {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   height: 24px;
 }
-#commentLists>.commentDiv>div:first-child{
-  width: 100px;
-  height: 24px;
-  margin: 2px 10px;
-  text-align: center;
-}
-#commentLists>.commentDiv>div:nth-child(2){
-  width: 80px;
-  height: 24px;
+#commentLists > .commentRow > td {
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: left;
+}
+#commentLists > .commentRow > td:first-child { /* 내용 + 작성시간 */
+  min-width: 0;
+  width: 80%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+#commentLists > .commentRow > td:nth-child(2) { /* 작성자 식별코드 */
+  min-width: 80px;
+  width: 120px;
+  max-width: 120px;
+  padding-left: 5px;
+  flex-grow: 0;
+}
+#commentLists > .commentRow > td:first-child > div:first-child { /* 내용 */
+  overflow: auto;
   white-space: nowrap;
 }
-#commentLists>.commentDiv>div:nth-child(3){
-  width: 80px;
-  height: 24px;
-  margin: 2px 10px;
-  text-align: left;
-  align-content: end;
+#commentLists > .commentRow > td:first-child > div:first-child::-webkit-scrollbar {
+  /* 스크롤바 숨기기 */
+  display: none; /* Webkit 기반 브라우저 (Chrome, Edge, Safari)에서 스크롤바 숨김 */
+}
+#commentLists > .commentRow > td:first-child > div:first-child {
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨김 */
+  -ms-overflow-style: none; /* Internet Explorer에서 스크롤바 숨김 */
+}
+#commentLists > .commentRow > td:first-child > div:nth-child(2) { /* 작성시간 */
+  color: grey;
   font-size: 0.8em;
+  align-self: flex-end;
   flex-grow: 1;
+  min-width: 0;
+  width: 80px;
+  flex-shrink: 0;
 }
 .comments-enter{
   display: flex;

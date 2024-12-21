@@ -55,7 +55,6 @@ public class MainController {
 					build();
 			model.addAttribute("theme", theme);
 		}
-		log.info("visitor : {}", visitor);
 		if(visitor == null) {
 			// 현재 날짜 가져오기
 	        LocalDate currentDate = LocalDate.now();
@@ -72,13 +71,11 @@ public class MainController {
 	        	}
 	        	num /= 10;
 	        }
-	        log.info("year : {}, month : {}, day : {}, code : {}", year, month, day, code);
 	        	
 			visitor = year + "" + month + "" + day + "" + code  + seqNum;
 			seqNum++;
 			model.addAttribute("visitor", visitor);
 		}
-		log.info("visitor : {}", visitor);
 		
 		model.addAttribute("fontAwesomeKey", fontAwesomeKey);
 		

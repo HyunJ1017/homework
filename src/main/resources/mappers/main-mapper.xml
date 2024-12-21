@@ -48,6 +48,7 @@
 		FROM "COMMENT"
 		WHERE
 			DEL_FL = 'N'
+		ORDER BY COMMENT_NO ASC
 	</select>
 	
 	<insert id="writeComment"
