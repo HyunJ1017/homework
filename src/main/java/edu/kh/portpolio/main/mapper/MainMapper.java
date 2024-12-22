@@ -21,4 +21,6 @@ public interface MainMapper {
 
 	Comment selectComment(Comment comment);
 
+	String getOracleTime();
+
 }

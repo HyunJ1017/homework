@@ -23,9 +23,10 @@ public class MainServiceImpl implements MainService {
 		String weeklyVisitCount;
 		
 		int result = mapper.insertCount();
+		Map<String, String> map = new HashMap<>();
+		map.put("oracleTime", mapper.getOracleTime());
 		
 		if(result > 0) {
-			Map<String, String> map = new HashMap<>();
 			allVisitCount = mapper.selectAllVisitCount();
 			weeklyVisitCount = mapper.selectWeeklyVisitCount();
 			map.put("allVisitCount", allVisitCount);

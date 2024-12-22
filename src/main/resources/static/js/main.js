@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // 해더 에니메이션 시작
   waveAnimation();
 
+  // 시간이벤트 시작
+  setTimeEvent();
+
   // 클릭이벤트
   // 이메일 복사
   const email = document.getElementById("email");
@@ -355,11 +358,11 @@ const logLogs = document.querySelectorAll(".skill-absolute");
 
 logSkills.forEach((skill, index) => {
   skill.addEventListener('mouseenter', () => {
-    logChanges[index].style.color = 'black';
+    logChanges[index].style.opacity = 0;
     logLogs[index].style.display = 'block';
   });
   skill.addEventListener('mouseleave', () => {
-    logChanges[index].style.color = 'white';
+    logChanges[index].style.opacity = 1;
     logLogs[index].style.display = 'none';
   });
 });
@@ -497,3 +500,72 @@ const renderingComments = () => {
 
 } // renderingComments end
 
+
+/* ******************************************************* */
+/* setTimeEvent */
+
+
+const setTimeEvent = () => {
+  const clockSurver = document.querySelector('#clock-surver');
+  const clockSystem = document.querySelector('#clock-system');
+  
+  
+  let hour;
+  let minute;
+  let second;
+  let ms;
+  
+  const surverTime = clockSurver.innerText.split(':');
+  hour = Number(surverTime[0]);
+  minute = Number(surverTime[1]);
+  second = Number(surverTime[2].split('.')[0]);
+  ms = Number(surverTime[2].split('.')[1]);
+  
+  // 오라클 시간
+  intervalClock("#clock-surver", hour, minute, second, ms);
+  
+  const now = new Date();
+  hour = now.getHours();
+  minute = now.getMinutes();
+  second = now.getSeconds();
+  ms =  Math.floor(now.getMilliseconds()/10);
+  
+  // 시스템시간
+  intervalClock("#clock-system", hour, minute, second, ms);
+
+  
+};
+
+
+const intervalClock = (clockDomName, hour, minute, second, ms) => {
+
+  const intervalClock = setInterval(() => {
+    const clockDom = document.querySelector(`${clockDomName}`);
+
+    if(ms === 100){
+      ms = -1;
+      second += 1;
+    }
+    if(second === 60){
+      second = 0;
+      minute += 1;
+    }
+    if(minute === 60){
+      minute = 0;
+      hour += 1;
+    }
+    if(hour === 24){
+      hour = 0;
+    }
+    
+    ms += 1;
+    clockDom.innerText = `${zeroSum(hour)}:${zeroSum(minute)}:${zeroSum(second)}.${zeroSum(ms)}`;
+  }, 10);
+};
+
+const zeroSum = (num) => {
+  if(num < 10){
+    return `0${num}`;
+  }
+  return num;
+}

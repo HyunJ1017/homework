@@ -80,6 +80,7 @@ public class MainController {
 		model.addAttribute("fontAwesomeKey", fontAwesomeKey);
 		
 		Map<String, String> map = service.getVisitCount();
+		model.addAttribute("oracleTime", map.get("oracleTime"));
 		model.addAttribute("allVisitCount", map.get("allVisitCount"));
 		model.addAttribute("weeklyVisitCount", map.get("weeklyVisitCount"));
 		

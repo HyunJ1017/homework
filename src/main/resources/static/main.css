@@ -129,7 +129,7 @@ footer{
   align-items: center;
   width: 100%;
   height: 16vh;
-  padding: 0 30px 0;
+  /* padding: 0 30px 0; */
 }
 #comment, #gear:hover{
   cursor: pointer;
@@ -451,8 +451,18 @@ main>.contents-section{
 }
 
 /* 별거없는기록 */
+#logSkill-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
 #logSkill-box > div{
   position: relative;
+  padding: 5px;
+  margin: 5px;
+  border: #008cff 1px solid;
+  border-radius: 5px;
 }
 #logSkill-box .skill-absolute{
   position: absolute;
