@@ -26,29 +26,34 @@
 	</select>
 	
 	<select id="getComments" resultType="Comment">
+		<![CDATA[
+	    WITH BASE_TIME AS (
+	        SELECT CURRENT_DATE + 9/24 AS BASE FROM DUAL
+	    )
 		SELECT
 			COMMENT_NO,
 			WRITER,
 			CONTENT,
-			<![CDATA[	
 			CASE
-		        WHEN (SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP) < INTERVAL '1' MINUTE
-		        THEN FLOOR(
-		                EXTRACT(SECOND FROM ((SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP)))
-		                + EXTRACT(MINUTE FROM ((SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP))) * 60 ) || '초 전'
-		        WHEN (SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP) < INTERVAL '1' HOUR
-		        THEN FLOOR(
-		                EXTRACT(MINUTE FROM ((SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP)))
-		                + EXTRACT(HOUR FROM ((SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP))) * 60 ) || '분 전'
-		        WHEN TRUNC(SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') = TRUNC(REG_DATE)
-		        THEN FLOOR(EXTRACT(HOUR FROM ((SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul') - CAST(REG_DATE AS TIMESTAMP)))) || '시간 전'
-		        ELSE TO_CHAR(REG_DATE, 'YYYY-MM-DD')
-		    END AS "REG_DATE"
-			]]>
-		FROM "COMMENT"
+	            WHEN BASE - REG_DATE < 1/24/60/2
+	            THEN '방금전'
+	            
+	            WHEN BASE - REG_DATE < 1/24/60
+	            THEN FLOOR((BASE - REG_DATE) * 60 * 60 * 24) || '초 전,'
+	            
+	            WHEN BASE - REG_DATE < 1/24
+	            THEN FLOOR((BASE - REG_DATE) * 60 * 24) || '분 전'
+	            
+	            WHEN BASE - REG_DATE < 1
+	            THEN FLOOR((BASE - REG_DATE) * 24) || '시간 전'
+	            
+	            ELSE TO_CHAR(REG_DATE, 'YYYY-MM-DD')
+	        END AS "REG_DATE"
+		FROM "COMMENT", BASE_TIME
 		WHERE
 			DEL_FL = 'N'
 		ORDER BY COMMENT_NO ASC
+		]]>
 	</select>
 	
 	<insert id="writeComment"
@@ -71,36 +76,38 @@
 	</insert>
 	
 	<select id="selectComment" resultType="Comment">
-		SELECT
-			COMMENT_NO,
-			WRITER,
-			CONTENT,
-			<![CDATA[	
-			CASE
-				WHEN CURRENT_DATE - REG_DATE < 1/24/60/2
-				THEN '방금전'
-				
-				WHEN CURRENT_DATE - REG_DATE < 1/24/60
-				THEN FLOOR( (CURRENT_DATE - REG_DATE) *60 *60 *24 ) || '초 전'
-				
-				WHEN CURRENT_DATE - REG_DATE < 1/24
-				THEN FLOOR( (CURRENT_DATE - REG_DATE) *60 *24 ) || '분 전'
-				
-				WHEN CURRENT_DATE - REG_DATE < 1
-				THEN FLOOR( (CURRENT_DATE - REG_DATE) *24 ) || '시간 전'
-				
-				ELSE TO_CHAR(REG_DATE, 'YYYY-MM-DD')
-				
-			END AS "REG_DATE"
-			]]>
-		FROM "COMMENT"
-		WHERE
-			DEL_FL = 'N'
-		AND COMMENT_NO = #{commentNo}
+		<![CDATA[
+	    WITH BASE_TIME AS (
+	        SELECT CURRENT_DATE + 9/24 AS BASE FROM DUAL
+	    )
+	    SELECT
+	        COMMENT_NO,
+	        WRITER,
+	        CONTENT,
+	        CASE
+	            WHEN BASE - REG_DATE < 1/24/60/2
+	            THEN '방금전'
+	            
+	            WHEN BASE - REG_DATE < 1/24/60
+	            THEN FLOOR((BASE - REG_DATE) * 60 * 60 * 24) || '초 전,'
+	            
+	            WHEN BASE - REG_DATE < 1/24
+	            THEN FLOOR((BASE - REG_DATE) * 60 * 24) || '분 전'
+	            
+	            WHEN BASE - REG_DATE < 1
+	            THEN FLOOR((BASE - REG_DATE) * 24) || '시간 전'
+	            
+	            ELSE TO_CHAR(REG_DATE, 'YYYY-MM-DD')
+	        END AS "REG_DATE"
+	    FROM "COMMENT", BASE_TIME
+	    WHERE
+	        DEL_FL = 'N'
+	        AND COMMENT_NO = #{commentNo}
+	    ]]>
 	</select>
 	
 	<select id="getOracleTime" resultType="string">
-		SELECT TO_CHAR(SYSTIMESTAMP, 'HH24:MI:SS.FF2') FROM DUAL
+		SELECT TO_CHAR(SYSTIMESTAMP , 'HH24:MI:SS.FF2') FROM DUAL
 	</select>
 	
 </mapper>

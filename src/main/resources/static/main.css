@@ -91,6 +91,7 @@ header>section:last-child{  height: 70%;}
 .fa-gear-code { color: #74C0FC !important; }
 .fa-loader { --fa-primary-color: #5291ff !important; --fa-secondary-color: #5291ff !important; }
 .fa-comment { --fa-primary-color: #fbff00 !important; --fa-secondary-color: #fbff00 !important; }
+.fa-circle-t { color: #fe5949 !important; }
 
 
 /* footers */
@@ -508,6 +509,14 @@ main>.contents-section{
   width: 100%;
   aspect-ratio: 6 / 4;
   border: none;
+}
+#skillStack-section2 li{
+  margin: 20px 40px;
+  font-size: 1.2em;
+  white-space: nowrap;
+}
+#skillStack-section2 a{
+  color: #008cff !important;
 }
 
 /* 쭉 쓰는 글 */

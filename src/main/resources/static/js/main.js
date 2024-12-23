@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
   }// for end
 
-});
+}); // DOMContentLoaded end
 let emailFl = false;
 let phoneFl = false;
 
@@ -480,8 +480,8 @@ const renderingComments = () => {
     .then(result => {
       if(result.code == 1){
         const comment = result.comment;
-        const commentDiv = document.createElement('div');
-        commentDiv.innerHTML = `<div>${comment.writer}</div><div>${comment.content}</div><div>${comment.regDate}</div>`;
+        const commentDiv = document.createElement('tr');
+        commentDiv.innerHTML = `<td><div>${comment.content}</div><div>${comment.regDate}</div></td><td>${comment.writer}</td`;
         commentDiv.classList.add("commentDiv");
         commentDiv.dataset.commentNo = comment.commentNo;
         commentLists.appendChild(commentDiv);
