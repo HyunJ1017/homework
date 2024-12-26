@@ -358,11 +358,11 @@ const logLogs = document.querySelectorAll(".skill-absolute");
 
 logSkills.forEach((skill, index) => {
   skill.addEventListener('mouseenter', () => {
-    logChanges[index].style.opacity = 0;
+    logChanges[index].style.opacity = 0.6;
     logLogs[index].style.display = 'block';
   });
   skill.addEventListener('mouseleave', () => {
-    logChanges[index].style.opacity = 1;
+    logChanges[index].style.opacity = 0.9;
     logLogs[index].style.display = 'none';
   });
 });
