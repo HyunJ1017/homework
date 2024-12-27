@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import edu.kh.portpolio.main.dto.Comment;
 import edu.kh.portpolio.main.mapper.MainMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
@@ -31,6 +33,8 @@ public class MainServiceImpl implements MainService {
 			weeklyVisitCount = mapper.selectWeeklyVisitCount();
 			map.put("allVisitCount", allVisitCount);
 			map.put("weeklyVisitCount", weeklyVisitCount);
+			log.info("[요청정보] allVisitCount : {}", allVisitCount);
+			log.info("[요청정보] weeklyVisitCount : {}", weeklyVisitCount);
 			return map;
 		}
 		

@@ -28,8 +28,6 @@ public class LoggingAspect {
 	@Value("${developer.desktop.ip}")
 	private String commonIp;
 	
-	private String[] ipList = {commonIp, "0:0:0:0:0:0:0:1"};
-	
 	// 모든 컨트롤러 수행 전에 로그 출력
 	@Before("PointCutBundle.controllerPointcut()")
 	public void beforeController(JoinPoint jp) {
@@ -47,7 +45,7 @@ public class LoggingAspect {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		if(clientIp.equals(ipList[0]) || clientIp.equals(ipList[1])) {
+		if(clientIp.equals(commonIp) || clientIp.equals("0:0:0:0:0:0:0:1") || clientIp.equals("127.0.0.1")) {
 			sb.append( String.format("[개발자요청] ip : %s", clientIp ));
 		} else {
 			sb.append( String.format("[방문자요청] ip : %s", clientIp ));
@@ -56,7 +54,6 @@ public class LoggingAspect {
 		
 		
 		sb.append( String.format(".    > %s.%s ", calssName, methodName ) );
-		
 		
 		log.info(sb.toString());
 	}
