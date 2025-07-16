@@ -106,7 +106,7 @@ window.addEventListener("resize", recalculatePositions);
 window.addEventListener("scroll", () => {
   const currentHeight = window.scrollY;
 
-  backgroundMoving(currentHeight);
+  // backgroundMoving(currentHeight);
 
   if(currentHeight > preHeight) {
     scrollStatus = "down";
@@ -168,21 +168,21 @@ window.addEventListener("scroll", () => {
 
 }) // scroll end
 
-// 문서 전체높이
-const backgroundBox = document.querySelector("#backgroundBox");
-const backgroundMoving = (currentHeight) => {
-  const backgroundImg = document.querySelector("#backgroundBox img");
-  const backgroundImgHeght = backgroundImg.offsetHeight;
+// 문서 전체높이에 맞춰서 배경이미지 슬라이드
+// const backgroundBox = document.querySelector("#backgroundBox");
+// const backgroundMoving = (currentHeight) => {
+//   const backgroundImg = document.querySelector("#backgroundBox img");
+//   const backgroundImgHeght = backgroundImg.offsetHeight;
   
-  // 이미지 높이 - 화면높이(가변범위)
-  const height = backgroundImgHeght - windowHeight;
+//   // 이미지 높이 - 화면높이(가변범위)
+//   const height = backgroundImgHeght - windowHeight;
 
-  // 문서 전체 높이 - 화면 높이(가변높이)
-  const docHeight = document.documentElement.scrollHeight;
+//   // 문서 전체 높이 - 화면 높이(가변높이)
+//   const docHeight = document.documentElement.scrollHeight;
 
-  backgroundBox.style.top = `${(currentHeight/docHeight)*(height)*(-1)}px`;
+//   backgroundBox.style.top = `${(currentHeight/docHeight)*(height)*(-1)}px`;
 
-};
+// };
 
 
 /* ******************************************************* */

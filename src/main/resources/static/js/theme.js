@@ -3,7 +3,7 @@ const userThemeBackgroundColor = document.querySelectorAll(".userTheme-backgroun
 const userThemeBackgroundColor70 = document.querySelectorAll(".userTheme-backgroundColor70");
 const userThemeBackgroundColorSlider = document.querySelector(".userTheme-backgroundColorSlider");
 const contentsSections = document.querySelectorAll(".contents-section");
-const backgroundImg = document.querySelector("#backgroundBox>img");
+// const backgroundImg = document.querySelector("#backgroundBox>img");
 const userThemeBorders = document.querySelectorAll(".userTheme-border");
 const userThemeBorderTops = document.querySelectorAll(".userTheme-borderTop");
 const userThemeBorderBottoms = document.querySelectorAll(".userTheme-borderBottom");
@@ -22,7 +22,7 @@ if(pageTheme.backgroundColor === 'black'){
   userThemeBackgroundColor70.forEach(element => {
     element.style.backgroundColor = 'rgb(5, 5, 5)';
   })
-  backgroundImg.style.filter = 'opacity(0.13)';
+  // backgroundImg.style.filter = 'opacity(0.13)';
   contentsSections.forEach(element => {
     element.style.backgroundColor = 'rgba(255, 255, 255, 0)';
     element.style.border = `1px solid ${pageTheme.borderColor}`;
@@ -36,7 +36,7 @@ if(pageTheme.backgroundColor === 'black'){
   userThemeBackgroundColor70.forEach(element => {
     element.style.backgroundColor = 'rgb(250, 250, 250)';
   })
-  backgroundImg.style.filter = 'opacity(0.2)';
+  // backgroundImg.style.filter = 'opacity(0.2)';
   contentsSections.forEach(element => {
     element.style.backgroundColor = 'rgba(255, 255, 255, 0.88)';
     element.style.border = `1px solid ${pageTheme.borderColor}`;
@@ -112,7 +112,7 @@ const renderingTheme = () => {
     document.querySelectorAll(".userTheme-backgroundColor70").forEach(element => {
       element.style.backgroundColor = 'rgba(5, 5, 5)';
     })
-    backgroundImg.style.filter = 'opacity(0.13)';
+    // backgroundImg.style.filter = 'opacity(0.13)';
     document.querySelectorAll('*').forEach(element => {
       element.style.color = 'white';
     });
@@ -165,7 +165,7 @@ const renderingTheme = () => {
     document.querySelectorAll(".userTheme-backgroundColor70").forEach(element => {
       element.style.backgroundColor = 'rgb(250, 250, 250)';
     })
-    backgroundImg.style.filter = 'opacity(0.2)';
+    // backgroundImg.style.filter = 'opacity(0.2)';
     document.querySelectorAll('*').forEach(element => {
       element.style.color = 'black';
     });
