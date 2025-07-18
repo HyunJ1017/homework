@@ -1,3 +1,21 @@
+/*
+
+  - 문서 생성시 페이지 태마 설정
+  - 흰색,검은색 변경
+
+  - 태마가 변경된 상태에서 새로운 객체가 형성되면? -> 좋지는않음...
+  - 객체속성에 넣을까?
+
+  - 현재: 클레스 부여 후 버튼 클릭시 로딩되있는 모든 객체 찾아서 변경하기
+    - 로딩되있는것도 아님, 처음 페이지 생성때 부터 전 객체가 로딩이 되어있음
+      -> 새로운 객체 생성시 변화하기 어려움
+  
+  - 변경 : 뭔가 만들어놔야함
+    - 생성할때 만들어둔걸 읽고 생성하게
+    - 클라이언트에? 서버에? -> 클라에
+
+*/
+
 
 const userThemeBackgroundColor = document.querySelectorAll(".userTheme-backgroundColor");
 const userThemeBackgroundColor70 = document.querySelectorAll(".userTheme-backgroundColor70");
