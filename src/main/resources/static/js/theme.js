@@ -8,24 +8,34 @@
 
   - 현재: 클레스 부여 후 버튼 클릭시 로딩되있는 모든 객체 찾아서 변경하기
     - 로딩되있는것도 아님, 처음 페이지 생성때 부터 전 객체가 로딩이 되어있음
-      -> 새로운 객체 생성시 변화하기 어려움
-  
-  - 변경 : 뭔가 만들어놔야함
-    - 생성할때 만들어둔걸 읽고 생성하게
-    - 클라이언트에? 서버에? -> 클라에
+
+  - 개선
+    - 페이지 로드할때마다 테마변경함수 콜업
+    - 이러면 번쩍번쩍하지 않나?
+      - 기본 검정 -> 흰색 변경
+    
 
 */
 
 
 const userThemeBackgroundColor = document.querySelectorAll(".userTheme-backgroundColor");
+  // 메인바디 배경
 const userThemeBackgroundColor70 = document.querySelectorAll(".userTheme-backgroundColor70");
+  // 해더, 푸터 배경
 const userThemeBackgroundColorSlider = document.querySelector(".userTheme-backgroundColorSlider");
+  // 좌측 슬라이더
 const contentsSections = document.querySelectorAll(".contents-section");
+  // 내용
 // const backgroundImg = document.querySelector("#backgroundBox>img");
+  // 배경그림(삭제)
 const userThemeBorders = document.querySelectorAll(".userTheme-border");
+  // 없나??
 const userThemeBorderTops = document.querySelectorAll(".userTheme-borderTop");
+  // 푸터 머릿선
 const userThemeBorderBottoms = document.querySelectorAll(".userTheme-borderBottom");
+  // 해더 바닥선
 const userThemeBorderTables = document.querySelectorAll(".userTheme-borderTable");
+  // 테이블선모양
 
 
 document.querySelectorAll('*').forEach(element => {
