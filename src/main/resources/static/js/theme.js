@@ -15,6 +15,14 @@
       - 기본 검정 -> 흰색 변경
     
 
+  서버 클래스
+  public class ThemeDto {
+    private String backgroundColor;
+    private String color;
+    private String linkColor;
+    private String borderColor;
+  }
+
 */
 
 
