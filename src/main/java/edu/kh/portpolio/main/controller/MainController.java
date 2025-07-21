@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.portpolio.main.dto.Comment;
 import edu.kh.portpolio.main.dto.ThemeDto;
 import edu.kh.portpolio.main.service.MainService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,10 +49,10 @@ public class MainController {
 		
 		if(theme == null) {
 			theme = theme.builder().
-					backgroundColor("black").
-					color("white").
-					linkColor("white").
-					borderColor("white").
+					backgroundColor("white").
+					color("black").
+					linkColor("black").
+					borderColor("black").
 					build();
 			model.addAttribute("theme", theme);
 		}
