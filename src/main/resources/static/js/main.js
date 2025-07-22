@@ -82,6 +82,21 @@ document.addEventListener("DOMContentLoaded", () => {
     
   }// for end
 
+  // 첫화면 처음 로딩시 블랙 -> 화이트
+  // 세션 변경요청
+  fetch('/main/theme?theme=theme&type=white')
+  .then(response => response.json())
+  .then(result => {
+    pageTheme = result; // 세션에서 얻어온 값으로 지정
+    loader.style.display = 'none'; // 삭제해야하나?
+    gear.style.display = 'block'; // 삭제해야하나?
+    themeFl = false; // -> theme.js에 있음
+    currentPageTheme = 'white'; // main.html에 있음, 어따쓰지...
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
 }); // DOMContentLoaded end
 let emailFl = false;
 let phoneFl = false;
