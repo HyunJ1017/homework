@@ -3,7 +3,7 @@
   1. 페이지 시작할때 객체 이벤트 추가
   2. 슬라이드 에니메이션
   3. ERD 에니메이션
-  4. 해더 아이콘 돌아가는거
+  4. 해더 아이콘 돌아가는거 (삭제)
   5. 로그
   6. 스킬
   8. 바닥
@@ -16,7 +16,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // 해더 에니메이션 시작
-  waveAnimation();
+  // waveAnimation();
 
   // 시간이벤트 시작
   setTimeEvent();
@@ -82,16 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
   }// for end
 
-  // 첫화면 처음 로딩시 블랙 -> 화이트
+  // 첫화면 처음 로딩시 세션에 있는 테마객체를 불러와 적용하기
   // 세션 변경요청
-  fetch('/main/theme?theme=theme&type=white')
+  fetch('/main/theme?theme=theme&type=none')
   .then(response => response.json())
   .then(result => {
     pageTheme = result; // 세션에서 얻어온 값으로 지정
-    loader.style.display = 'none'; // 삭제해야하나?
-    gear.style.display = 'block'; // 삭제해야하나?
-    themeFl = false; // -> theme.js에 있음
-    currentPageTheme = 'white'; // main.html에 있음, 어따쓰지...
+    renderingTheme(pageTheme);
   })
   .catch(err => {
     console.log(err);
@@ -317,38 +314,39 @@ const leaveEvent2 = () => {
 } // leaveEvent end
 
 /* ******************************************************* */
+// 해더 애니메이션
 /* header-icons */
-const headerIcons = document.getElementById("header-icons");
+// const headerIcons = document.getElementById("header-icons");
 
-const wave = headerIcons.children;
+// const wave = headerIcons.children;
 
-const waveAnimation = () => {
-  // 2초마다 각 아이콘들을화면 오른쪽에서 왼쪽으로 이동
-  for(let i = 0; i < wave.length; i++){
-    const icon = wave[i];
+// const waveAnimation = () => {
+//   // 2초마다 각 아이콘들을화면 오른쪽에서 왼쪽으로 이동
+//   for(let i = 0; i < wave.length; i++){
+//     const icon = wave[i];
     
-    // 이동과 회전 애니메이션 적용
-    setTimeout(() => {
-      icon.style.transition = "all 12s linear";
-      icon.style.left = "-10vw";
-      icon.style.transform = "rotate(-1080deg)";
-    }, 2000 * i);
-  }
+//     // 이동과 회전 애니메이션 적용
+//     setTimeout(() => {
+//       icon.style.transition = "all 12s linear";
+//       icon.style.left = "-10vw";
+//       icon.style.transform = "rotate(-1080deg)";
+//     }, 2000 * i);
+//   }
   
-  // 각 요소 이동 후 다시시작
-  setTimeout(() => {
-    for (let i = 0; i < wave.length; i++) {
-      const icon = wave[i];
-      setTimeout(() => {
-        icon.style.transition = 'none';
-        icon.style.left = '110vw';
-        icon.style.transform = 'rotate(0deg)';
-      }, 2000 * i);
+//   // 각 요소 이동 후 다시시작
+//   setTimeout(() => {
+//     for (let i = 0; i < wave.length; i++) {
+//       const icon = wave[i];
+//       setTimeout(() => {
+//         icon.style.transition = 'none';
+//         icon.style.left = '110vw';
+//         icon.style.transform = 'rotate(0deg)';
+//       }, 2000 * i);
       
-    }
-    setTimeout( () => {waveAnimation()} , 2000);
-  }, 2000 * (wave.length - 1 ));
-} // waveAnimation end
+//     }
+//     setTimeout( () => {waveAnimation()} , 2000);
+//   }, 2000 * (wave.length - 1 ));
+// } // waveAnimation end
 
 
 /* ******************************************************* */

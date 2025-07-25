@@ -91,20 +91,24 @@ public class MainController {
 	@GetMapping("theme")
 	@ResponseBody
 	public ThemeDto changeTheme(
-			@RequestParam("theme") String theme,
-			@RequestParam("type") String thype,
+			@RequestParam(name = "theme", required = false, defaultValue = "theme") String theme,
+			@RequestParam(name = "type", required = false,  defaultValue = "none") String thype,
 			@SessionAttribute("theme") ThemeDto pageTheme,
 			Model model) {
 		
 		if(theme.equals("theme")) {
-			if(thype.equals("black")) {
-				pageTheme.setBackgroundColor("black");
-				pageTheme.setBorderColor("white");
-				pageTheme.setColor("white");
+			if (thype.equals("none")) {
+				return pageTheme;
 			} else if(thype.equals("white")) {
 				pageTheme.setBackgroundColor("white");
 				pageTheme.setBorderColor("black");
 				pageTheme.setColor("black");
+				pageTheme.setLinkColor("black");
+			} else if(thype.equals("black")) {
+				pageTheme.setBackgroundColor("black");
+				pageTheme.setBorderColor("white");
+				pageTheme.setColor("white");
+				pageTheme.setLinkColor("white");
 			}
 		}
 		model.addAttribute("theme", pageTheme);

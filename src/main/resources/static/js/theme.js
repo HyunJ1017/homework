@@ -26,81 +26,65 @@
 */
 
 
-const userThemeBackgroundColor = document.querySelectorAll(".userTheme-backgroundColor");
-  // 메인바디 배경
-const userThemeBackgroundColor70 = document.querySelectorAll(".userTheme-backgroundColor70");
-  // 해더, 푸터 배경
-const userThemeBackgroundColorSlider = document.querySelector(".userTheme-backgroundColorSlider");
-  // 좌측 슬라이더
-const contentsSections = document.querySelectorAll(".contents-section");
-  // 내용
-// const backgroundImg = document.querySelector("#backgroundBox>img");
-  // 배경그림(삭제)
-const userThemeBorders = document.querySelectorAll(".userTheme-border");
-  // 없나??
-const userThemeBorderTops = document.querySelectorAll(".userTheme-borderTop");
-  // 푸터 머릿선
-const userThemeBorderBottoms = document.querySelectorAll(".userTheme-borderBottom");
-  // 해더 바닥선
-const userThemeBorderTables = document.querySelectorAll(".userTheme-borderTable");
-  // 테이블선모양
+/* ***************************************************************************************************** */
+// 태마적용 삭제
+
+// document.querySelectorAll('*').forEach(element => {
+//   element.style.color = pageTheme.color;
+// });
+
+// userThemeBackgroundColor.forEach(element => {
+//   element.style.backgroundColor = pageTheme.backgroundColor;
+// }); // forEach end
+
+// if(pageTheme.backgroundColor === 'black'){
+//   userThemeBackgroundColor70.forEach(element => {
+//     element.style.backgroundColor = 'rgb(5, 5, 5)';
+//   })
+//   // backgroundImg.style.filter = 'opacity(0.13)';
+//   contentsSections.forEach(element => {
+//     element.style.backgroundColor = 'rgba(255, 255, 255, 0)';
+//     element.style.border = `1px solid ${pageTheme.borderColor}`;
+//   })
+//   userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+//   document.querySelectorAll(".userTheme-backgroundColorSlider>a").forEach(element => {
+//     element.style.color = 'black';
+//   })
+
+// } else if (pageTheme.backgroundColor === 'white') {
+//   userThemeBackgroundColor70.forEach(element => {
+//     element.style.backgroundColor = 'rgb(250, 250, 250)';
+//   })
+//   // backgroundImg.style.filter = 'opacity(0.2)';
+//   contentsSections.forEach(element => {
+//     element.style.backgroundColor = 'rgba(255, 255, 255, 0.88)';
+//     element.style.border = `1px solid ${pageTheme.borderColor}`;
+//   })
+//   userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+//   document.querySelectorAll(".userTheme-backgroundColorSlider>a").forEach(element => {
+//     element.style.color = 'white';
+//   })
+// } // backgroundColor end
 
 
-document.querySelectorAll('*').forEach(element => {
-  element.style.color = pageTheme.color;
-});
+// userThemeBorders.forEach(element => {
+//   element.style.border = `1px solid ${pageTheme.borderColor}`;
+// })
+// userThemeBorderTops.forEach(element => {
+//   element.style.borderTop = `1px solid ${pageTheme.borderColor}`;
+// })
+// userThemeBorderBottoms.forEach(element => {
+//   element.style.borderBottom = `1px solid ${pageTheme.borderColor}`;
+// })
+// userThemeBorderTables.forEach(element => {
+//   element.style.borderColor = pageTheme.borderColor;
+// })
 
-userThemeBackgroundColor.forEach(element => {
-  element.style.backgroundColor = pageTheme.backgroundColor;
-}); // forEach end
-
-if(pageTheme.backgroundColor === 'black'){
-  userThemeBackgroundColor70.forEach(element => {
-    element.style.backgroundColor = 'rgb(5, 5, 5)';
-  })
-  // backgroundImg.style.filter = 'opacity(0.13)';
-  contentsSections.forEach(element => {
-    element.style.backgroundColor = 'rgba(255, 255, 255, 0)';
-    element.style.border = `1px solid ${pageTheme.borderColor}`;
-  })
-  userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-  document.querySelectorAll(".userTheme-backgroundColorSlider>a").forEach(element => {
-    element.style.color = 'black';
-  })
-  
-} else if (pageTheme.backgroundColor === 'white') {
-  userThemeBackgroundColor70.forEach(element => {
-    element.style.backgroundColor = 'rgb(250, 250, 250)';
-  })
-  // backgroundImg.style.filter = 'opacity(0.2)';
-  contentsSections.forEach(element => {
-    element.style.backgroundColor = 'rgba(255, 255, 255, 0.88)';
-    element.style.border = `1px solid ${pageTheme.borderColor}`;
-  })
-  userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-  document.querySelectorAll(".userTheme-backgroundColorSlider>a").forEach(element => {
-    element.style.color = 'white';
-  })
-} // backgroundColor end
-
-
-userThemeBorders.forEach(element => {
-  element.style.border = `1px solid ${pageTheme.borderColor}`;
-})
-userThemeBorderTops.forEach(element => {
-  element.style.borderTop = `1px solid ${pageTheme.borderColor}`;
-})
-userThemeBorderBottoms.forEach(element => {
-  element.style.borderBottom = `1px solid ${pageTheme.borderColor}`;
-})
-userThemeBorderTables.forEach(element => {
-  element.style.borderColor = pageTheme.borderColor;
-})
-
-
-
-
-
+/* ***************************************************************************************************** */
+                            
+                            
+                            
+                            
 const gear = document.querySelector('#gear');
 const footer = document.querySelector('footer');
 const footerContents = document.querySelector('.footer-contents');
@@ -114,7 +98,7 @@ gear.addEventListener('click', () => {
   setTimeout(() => {
     footerFl = false;
   }, 300);
-  renderingTheme();
+  renderingThemeSection();
 }); // click end
 
 footer.addEventListener('mouseleave', () => {
@@ -123,7 +107,7 @@ footer.addEventListener('mouseleave', () => {
   contentsClear();
 });  // mouseleave end
 
-const renderingTheme = () => {
+const renderingThemeSection = () => {
   footerContents.style.height = '10vh';
   footerContents.style.flexDirection = 'column';
   footerContents.style.justifyContent = 'center';
@@ -136,42 +120,22 @@ const renderingTheme = () => {
 
   // 검은색 클릭시
   document.querySelector('#backgroundColorBlack').addEventListener('click', () => {
+    // 중복실행 방지
     if(themeFl) return;
     themeFl = true;
     gear.style.display = 'none';
     loader.style.display = 'block';
 
+    // 태마객체 변경
+    pageTheme = {
+      backgroundColor : 'black',
+      color : 'white',
+      linkColor : 'white',
+      borderColor : 'white'
+    };
+
     // 현제페이지 변경
-    document.querySelectorAll(".userTheme-backgroundColor").forEach(element => {
-      element.style.backgroundColor = 'black';
-    })
-    document.querySelectorAll(".userTheme-backgroundColor70").forEach(element => {
-      element.style.backgroundColor = 'rgba(5, 5, 5)';
-    })
-    // backgroundImg.style.filter = 'opacity(0.13)';
-    document.querySelectorAll('*').forEach(element => {
-      element.style.color = 'white';
-    });
-    contentsSections.forEach(element => {
-      element.style.backgroundColor = 'rgba(255, 255, 255, 0)';
-      element.style.border = '1px solid white';
-    })
-    document.querySelectorAll(".userTheme-border").forEach(element => {
-      element.style.border = '1px solid white';
-    })
-    userThemeBorderTops.forEach(element => {
-      element.style.borderTop = '1px solid white';
-    })
-    userThemeBorderBottoms.forEach(element => {
-      element.style.borderBottom = '1px solid white';
-    })
-    userThemeBorderTables.forEach(element => {
-      element.style.borderColor = 'white';
-    })
-    userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-    document.querySelectorAll(".userTheme-backgroundColorSlider>a").forEach(element => {
-      element.style.color = 'black';
-    })
+    renderingTheme(pageTheme);
 
     // 세션 변경요청
     fetch('/main/theme?theme=theme&type=black')
@@ -189,42 +153,22 @@ const renderingTheme = () => {
 
   // 흰색 클릭시
   document.querySelector('#backgroundColorWhite').addEventListener('click', () => {
+    // 중복실행 방지
     if(themeFl) return;
     themeFl = true;
     gear.style.display = 'none';
     loader.style.display = 'block';
 
+    // 태마객체 변경
+    pageTheme = {
+      backgroundColor : 'white',
+      color : 'black',
+      linkColor : 'black',
+      borderColor : 'black'
+    };
+
     // 현제페이지 변경
-    document.querySelectorAll(".userTheme-backgroundColor").forEach(element => {
-      element.style.backgroundColor = 'white';
-    })
-    document.querySelectorAll(".userTheme-backgroundColor70").forEach(element => {
-      element.style.backgroundColor = 'rgb(250, 250, 250)';
-    })
-    // backgroundImg.style.filter = 'opacity(0.2)';
-    document.querySelectorAll('*').forEach(element => {
-      element.style.color = 'black';
-    });
-    contentsSections.forEach(element => {
-      element.style.backgroundColor = 'rgba(255, 255, 255, 0.88)';
-      element.style.border = '1px solid black';
-    })
-    document.querySelectorAll(".userTheme-border").forEach(element => {
-      element.style.border = '1px solid black';
-    })
-    userThemeBorderTops.forEach(element => {
-      element.style.borderTop = '1px solid black';
-    })
-    userThemeBorderBottoms.forEach(element => {
-      element.style.borderBottom = '1px solid black';
-    })
-    userThemeBorderTables.forEach(element => {
-      element.style.borderColor = 'black';
-    })
-    userThemeBackgroundColorSlider.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    document.querySelectorAll(".userTheme-backgroundColorSlider>a").forEach(element => {
-      element.style.color = 'white';
-    })
+    renderingTheme(pageTheme);
 
     // 세션 변경요청
     fetch('/main/theme?theme=theme&type=white')
@@ -247,3 +191,65 @@ const contentsClear = () => {
   footerContents.style.justifyContent = 'flex-end';
   footerContents.innerHTML = '';
 }  // contentsClear end
+
+// *************************************************************************************************
+// 테마 변경 함수
+const renderingTheme = (pageTheme) => {
+
+  // pageTheme : 서버에서 받아온 테마 정보
+
+  // backgroundColor, color, linkColor(?), borderColor
+
+  const userThemeBackgroundColor = document.querySelectorAll(".userTheme-backgroundColor");
+  // 메인바디 배경
+  const userThemeBackgroundColor70 = document.querySelectorAll(".userTheme-backgroundColor70");
+  // 해더, 푸터 배경
+  const userThemeBackgroundColorSlider = document.querySelector(".userTheme-backgroundColorSlider");
+  // 좌측 슬라이더
+  const contentsSections = document.querySelectorAll(".contents-section");
+  // 내용
+  // const backgroundImg = document.querySelector("#backgroundBox>img");
+  // 배경그림(삭제)
+  const userThemeBorders = document.querySelectorAll(".userTheme-border");
+  // 없나??
+  const userThemeBorderTops = document.querySelectorAll(".userTheme-borderTop");
+  // 푸터 머릿선
+  const userThemeBorderBottoms = document.querySelectorAll(".userTheme-borderBottom");
+  // 해더 바닥선
+  const userThemeBorderTables = document.querySelectorAll(".userTheme-borderTable");
+  // 테이블선모양
+
+
+  userThemeBackgroundColor.forEach(element => {
+    element.style.backgroundColor = pageTheme.backgroundColor;
+  })
+  userThemeBackgroundColor70.forEach(element => {
+    element.style.backgroundColor = pageTheme.backgroundColor;
+  })
+  userThemeBackgroundColorSlider.style.backgroundColor = pageTheme.backgroundColor;
+
+  document.querySelectorAll("*").forEach(element => {
+    element.style.color = pageTheme.color;
+  });
+
+  contentsSections.forEach(element => {
+    element.style.backgroundColor = pageTheme.backgroundColor;
+    element.style.border = `1px solid ${pageTheme.borderColor}`;
+  })
+
+  userThemeBorders.forEach(element => {
+    element.style.border = `1px solid ${pageTheme.borderColor}`;
+  })
+  userThemeBorderTops.forEach(element => {
+    element.style.borderTop = `1px solid ${pageTheme.borderColor}`;
+  })
+  userThemeBorderBottoms.forEach(element => {
+    element.style.borderBottom = `1px solid ${pageTheme.borderColor}`;
+  })
+  userThemeBorderTables.forEach(element => {
+    element.style.borderColor = pageTheme.borderColor;
+  })
+
+
+}
+// *************************************************************************************************
