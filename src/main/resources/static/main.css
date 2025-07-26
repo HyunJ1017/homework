@@ -1,3 +1,12 @@
+/* 
+z-index
+
+backgroundBox -1
+skider 10
+header 10
+footer 10
+*/
+
 /* commons */
 *{
   box-sizing: border-box;
@@ -267,7 +276,8 @@ footer{
   top: 20%;
   left: 2%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   z-index: 10;
@@ -276,6 +286,13 @@ footer{
 }
 .slider>a{
   margin: 10px 0;
+  padding: 10px;
+  border: #74c1fc77 solid 1px;
+  background-color: #74c1fc44;
+}
+.slider>a:hover{
+  border: #74C0FC solid 1px;
+  background-color: #74c1fc6b;
 }
 
 /* contents */
